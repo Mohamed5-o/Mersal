@@ -1,7 +1,7 @@
 package com.mersal.app
 
 data class SendConfig(
-    val phone: String,
+    val phones: List<String>,
     val message: String,
     val count: Int,
     val intervalMs: Long
@@ -9,8 +9,11 @@ data class SendConfig(
 
 /** Shared state between the accessibility service and the UI. */
 object SendEngine {
-    const val MAX_COUNT = 50
-    const val MIN_GAP_SECONDS = 3
+    const val MAX_COUNT = 100
+    const val MAX_NUMBERS = 5
+    const val MAX_QUICK = 25
+    const val MAX_TOTAL = 100
+    const val MIN_GAP_SECONDS = 1
 
     enum class State { IDLE, RUNNING, DONE, STOPPED, TIMEOUT, NO_WHATSAPP }
 

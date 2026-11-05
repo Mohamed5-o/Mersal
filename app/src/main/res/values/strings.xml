@@ -10,13 +10,13 @@
     <string name="enable">Enable</string>
     <string name="status_help">Open Accessibility, pick Mersal and turn it on. If the switch is greyed out: App info, then the three dots menu, then Allow restricted settings.</string>
 
-    <string name="label_phone">Chat number</string>
-    <string name="hint_phone">Country code + number, e.g. 201001234567</string>
+    <string name="label_phone">Chat numbers (up to 5)</string>
+    <string name="hint_phone">One per line, with country code, e.g. 201001234567</string>
     <string name="label_message">Message</string>
     <string name="hint_message">Type the text to repeat</string>
     <string name="label_count">Times</string>
     <string name="label_interval">Gap (seconds)</string>
-    <string name="limits_note">Gap of 3 s or more  •  Up to 50 messages  •  Press Volume Down to stop</string>
+    <string name="limits_note">Gap of 1 s or more  •  100 messages in total  •  Numbers go one after the other  •  Press Volume Down to stop</string>
 
     <string name="start">Start</string>
     <string name="stop">Stop</string>
@@ -28,11 +28,14 @@
     <string name="state_timeout">Send button not found. Open the right chat and try again.</string>
     <string name="state_no_whatsapp">WhatsApp is not installed</string>
 
-    <string name="err_phone">Enter the number with country code</string>
+    <string name="err_phone">1 to 5 numbers, each with country code</string>
     <string name="err_message">Write a message first</string>
-    <string name="err_count">From 1 to 50</string>
-    <string name="err_interval">At least 3 seconds</string>
+    <string name="err_count">From 1 to 100</string>
+    <string name="err_interval">At least 1 second</string>
     <string name="err_service">Turn on the Mersal service first</string>
 
     <string name="footer">Do not touch the screen while sending, and use it only with chats that agree to it.</string>
+    <string name="err_total">Numbers × times can not exceed 100 in total</string>
+    <string name="quick">⚡ Quick: first number only, up to 25, no gap</string>
+    <string name="err_quick">Quick mode: 1 to 25 messages</string>
 </resources>

@@ -25,7 +25,11 @@ class MersalService : AccessibilityService() {
     private val handler = Handler(Looper.getMainLooper())
     private var cfg: SendConfig? = null
     private var running = false
-    private var sent = 0
+    private var sent = 0          // total sent across all numbers
+    private var total = 0         // numbers x count
+    private var idx = 0           // current number index
+    private var sentHere = 0      // sent to the current number
+    private var firstPending = true // first message of a chat comes pre-filled from the link
     private var progressAt = 0L
 
     private val tick = Runnable { step() }
@@ -62,10 +66,14 @@ class MersalService : AccessibilityService() {
         handler.removeCallbacks(tick)
         cfg = c
         sent = 0
+        idx = 0
+        sentHere = 0
+        firstPending = true
+        total = c.count * c.phones.size
         running = true
         progressAt = SystemClock.elapsedRealtime()
-        SendEngine.update(SendEngine.State.RUNNING, 0, c.count)
-        if (!launchChat(c)) {
+        SendEngine.update(SendEngine.State.RUNNING, 0, total)
+        if (!launchChat(c.phones[0], c.message)) {
             stopRun(SendEngine.State.NO_WHATSAPP)
             return
         }
@@ -75,7 +83,7 @@ class MersalService : AccessibilityService() {
     fun stopRun(s: SendEngine.State) {
         running = false
         handler.removeCallbacks(tick)
-        SendEngine.update(s, sent, cfg?.count ?: 0)
+        SendEngine.update(s, sent, total)
         if (s != SendEngine.State.IDLE) bringAppToFront()
     }
 
@@ -96,11 +104,11 @@ class MersalService : AccessibilityService() {
         false
     }
 
-    private fun launchChat(c: SendConfig): Boolean {
+    private fun launchChat(phone: String, message: String): Boolean {
         val pkg = PKGS.firstOrNull { isInstalled(it) } ?: return false
         val uris = listOf(
-            "https://wa.me/${c.phone}?text=${Uri.encode(c.message)}",
-            "whatsapp://send?phone=${c.phone}&text=${Uri.encode(c.message)}"
+            "https://wa.me/$phone?text=${Uri.encode(message)}",
+            "whatsapp://send?phone=$phone&text=${Uri.encode(message)}"
         )
         for (u in uris) {
             try {
@@ -133,13 +141,16 @@ class MersalService : AccessibilityService() {
 
         val send = findSend(root)
         if (send == null) {
-            // Text box is empty (mic icon showing): type the message, then wait for the send button.
-            val edit = findEdit(root)
-            if (edit != null) {
-                val args = Bundle().apply {
-                    putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, c.message)
+            // First message of a chat arrives pre-filled from the link: just wait for it to load.
+            // Later messages: the box is empty, so type the text and wait for the send button.
+            if (!firstPending) {
+                val edit = findEdit(root)
+                if (edit != null) {
+                    val args = Bundle().apply {
+                        putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, c.message)
+                    }
+                    edit.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args)
                 }
-                edit.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args)
             }
             handler.postDelayed(tick, 600)
             return
@@ -147,10 +158,25 @@ class MersalService : AccessibilityService() {
 
         if (click(send)) {
             sent++
+            sentHere++
+            firstPending = false
             progressAt = SystemClock.elapsedRealtime()
-            SendEngine.update(SendEngine.State.RUNNING, sent, c.count)
-            if (sent >= c.count) {
-                stopRun(SendEngine.State.DONE)
+            SendEngine.update(SendEngine.State.RUNNING, sent, total)
+
+            if (sentHere >= c.count) {
+                if (idx + 1 >= c.phones.size) {
+                    stopRun(SendEngine.State.DONE)
+                    return
+                }
+                // Move on to the next number, one after the other.
+                idx++
+                sentHere = 0
+                firstPending = true
+                if (!launchChat(c.phones[idx], c.message)) {
+                    stopRun(SendEngine.State.NO_WHATSAPP)
+                    return
+                }
+                handler.postDelayed(tick, maxOf(c.intervalMs, 2500L))
             } else {
                 handler.postDelayed(tick, c.intervalMs)
             }

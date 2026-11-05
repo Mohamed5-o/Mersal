@@ -128,8 +128,9 @@
                 style="@style/Mersal.Input"
                 android:hint="@string/hint_phone"
                 android:importantForAutofill="no"
-                android:inputType="phone"
-                android:maxLines="1" />
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:minLines="2" />
 
             <TextView
                 style="@style/Mersal.Label"
@@ -165,7 +166,7 @@
                         style="@style/Mersal.Input"
                         android:importantForAutofill="no"
                         android:inputType="number"
-                        android:maxLength="2"
+                        android:maxLength="3"
                         android:maxLines="1" />
                 </LinearLayout>
 
@@ -234,6 +235,19 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnQuick"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_pill"
+            android:stateListAnimator="@null"
+            android:text="@string/quick"
+            android:textAllCaps="false"
+            android:textColor="@color/accent2"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/progress"

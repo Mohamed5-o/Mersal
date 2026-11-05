@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var etInterval: EditText
     private lateinit var btnStart: Button
     private lateinit var btnStop: Button
+    private lateinit var btnQuick: Button
     private lateinit var progress: ProgressBar
     private lateinit var txtState: TextView
 
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         etInterval = findViewById(R.id.etInterval)
         btnStart = findViewById(R.id.btnStart)
         btnStop = findViewById(R.id.btnStop)
+        btnQuick = findViewById(R.id.btnQuick)
         progress = findViewById(R.id.progress)
         txtState = findViewById(R.id.txtState)
 
@@ -66,7 +68,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
 
-        btnStart.setOnClickListener { start() }
+        btnStart.setOnClickListener { start(false) }
+        btnQuick.setOnClickListener { start(true) }
         btnStop.setOnClickListener { SendEngine.stop() }
     }
 
@@ -95,9 +98,14 @@ class MainActivity : AppCompatActivity() {
             .apply()
     }
 
-    private fun start() {
-        val phone = etPhone.text.toString().filter { it.isDigit() }.trimStart('0')
-        if (phone.length !in 8..15) {
+    private fun start(quick: Boolean) {
+        val allPhones = etPhone.text.toString()
+            .split(Regex("[\\n,;،]+"))
+            .map { it.filter { ch -> ch.isDigit() }.trimStart('0') }
+            .filter { it.isNotEmpty() }
+            .distinct()
+        val phones = if (quick) allPhones.take(1) else allPhones
+        if (phones.isEmpty() || phones.size > SendEngine.MAX_NUMBERS || phones.any { it.length !in 8..15 }) {
             etPhone.error = getString(R.string.err_phone); etPhone.requestFocus(); return
         }
         val msg = etMessage.text.toString().trim()
@@ -105,11 +113,15 @@ class MainActivity : AppCompatActivity() {
             etMessage.error = getString(R.string.err_message); etMessage.requestFocus(); return
         }
         val count = etCount.text.toString().toIntOrNull() ?: 0
-        if (count !in 1..SendEngine.MAX_COUNT) {
-            etCount.error = getString(R.string.err_count); etCount.requestFocus(); return
+        val maxCount = if (quick) SendEngine.MAX_QUICK else SendEngine.MAX_COUNT
+        if (count !in 1..maxCount) {
+            etCount.error = getString(if (quick) R.string.err_quick else R.string.err_count); etCount.requestFocus(); return
         }
-        val gap = etInterval.text.toString().toIntOrNull() ?: 0
-        if (gap < SendEngine.MIN_GAP_SECONDS) {
+        if (count * phones.size > SendEngine.MAX_TOTAL) {
+            etCount.error = getString(R.string.err_total); etCount.requestFocus(); return
+        }
+        val gap = if (quick) 0 else (etInterval.text.toString().toIntOrNull() ?: 0)
+        if (!quick && gap < SendEngine.MIN_GAP_SECONDS) {
             etInterval.error = getString(R.string.err_interval); etInterval.requestFocus(); return
         }
         val svc = MersalService.instance
@@ -119,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         saveFields()
-        svc.begin(SendConfig(phone, msg, count, gap * 1000L))
+        svc.begin(SendConfig(phones, msg, count, gap * 1000L))
     }
 
     private fun refresh() {
@@ -136,6 +148,8 @@ class MainActivity : AppCompatActivity() {
 
         btnStart.isEnabled = !running
         btnStart.alpha = if (running) 0.4f else 1f
+        btnQuick.isEnabled = !running
+        btnQuick.alpha = if (running) 0.4f else 1f
         btnStop.isEnabled = running
         btnStop.alpha = if (running) 1f else 0.4f
         listOf(etPhone, etMessage, etCount, etInterval).forEach { it.isEnabled = !running }

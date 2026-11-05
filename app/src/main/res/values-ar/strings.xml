@@ -10,13 +10,13 @@
     <string name="enable">تفعيل</string>
     <string name="status_help">افتح إعدادات سهولة الوصول، اختر Mersal وفعّل الخدمة. لو المفتاح رمادي: معلومات التطبيق ثم قائمة النقاط الثلاث ثم السماح بالإعدادات المقيّدة.</string>
 
-    <string name="label_phone">رقم المحادثة</string>
-    <string name="hint_phone">رمز الدولة + الرقم، مثال 201001234567</string>
+    <string name="label_phone">أرقام المحادثات (حتى 5)</string>
+    <string name="hint_phone">رقم في كل سطر مع رمز الدولة، مثال 201001234567</string>
     <string name="label_message">الرسالة</string>
     <string name="hint_message">اكتب النص المراد تكراره</string>
     <string name="label_count">عدد المرات</string>
     <string name="label_interval">الفاصل (ثانية)</string>
-    <string name="limits_note">الفاصل 3 ثوانٍ فأكثر  •  حتى 50 رسالة  •  اضغط خفض الصوت للإيقاف</string>
+    <string name="limits_note">الفاصل ثانية فأكثر  •  100 رسالة إجمالًا  •  الأرقام تُرسل واحدًا بعد الآخر  •  اضغط خفض الصوت للإيقاف</string>
 
     <string name="start">ابدأ</string>
     <string name="stop">إيقاف</string>
@@ -28,11 +28,14 @@
     <string name="state_timeout">لم أجد زر الإرسال. افتح المحادثة الصحيحة وحاول مرة أخرى.</string>
     <string name="state_no_whatsapp">واتساب غير مثبّت</string>
 
-    <string name="err_phone">اكتب الرقم مع رمز الدولة</string>
+    <string name="err_phone">من 1 إلى 5 أرقام، كل رقم برمز الدولة</string>
     <string name="err_message">اكتب الرسالة أولًا</string>
-    <string name="err_count">من 1 إلى 50</string>
-    <string name="err_interval">3 ثوانٍ على الأقل</string>
+    <string name="err_count">من 1 إلى 100</string>
+    <string name="err_interval">ثانية واحدة على الأقل</string>
     <string name="err_service">فعّل خدمة Mersal أولًا</string>
 
     <string name="footer">لا تلمس الشاشة أثناء الإرسال، واستخدمه فقط مع محادثات توافق على ذلك.</string>
+    <string name="err_total">عدد الأرقام × عدد المرات لا يتجاوز 100 إجمالًا</string>
+    <string name="quick">⚡ نص فوري: أول رقم فقط، حتى 25 رسالة، بدون فاصل</string>
+    <string name="err_quick">النص الفوري: من 1 إلى 25 رسالة</string>
 </resources>
