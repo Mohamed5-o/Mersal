@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mersal</string>
+    <string name="tagline">Send. Repeat. Relax.</string>
+    <string name="lang_toggle">العربية</string>
+    <string name="service_desc">Taps the Send button in WhatsApp for you, only as many times and at the gap you choose. It never reads your chats and never sends data anywhere.</string>
+
+    <string name="status_on">Service is on, ready to go</string>
+    <string name="status_off">Accessibility service is off</string>
+    <string name="enable">Enable</string>
+    <string name="status_help">Open Accessibility, pick Mersal and turn it on. If the switch is greyed out: App info, then the three dots menu, then Allow restricted settings.</string>
+
+    <string name="label_phone">Chat number</string>
+    <string name="hint_phone">Country code + number, e.g. 201001234567</string>
+    <string name="label_message">Message</string>
+    <string name="hint_message">Type the text to repeat</string>
+    <string name="label_count">Times</string>
+    <string name="label_interval">Gap (seconds)</string>
+    <string name="limits_note">Gap of 3 s or more  •  Up to 50 messages  •  Press Volume Down to stop</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
+    <string name="state_idle">Ready</string>
+    <string name="state_running">Sending… %1$d / %2$d</string>
+    <string name="state_done">Done. %1$d messages sent</string>
+    <string name="state_stopped">Stopped at %1$d / %2$d</string>
+    <string name="state_timeout">Send button not found. Open the right chat and try again.</string>
+    <string name="state_no_whatsapp">WhatsApp is not installed</string>
+
+    <string name="err_phone">Enter the number with country code</string>
+    <string name="err_message">Write a message first</string>
+    <string name="err_count">From 1 to 50</string>
+    <string name="err_interval">At least 3 seconds</string>
+    <string name="err_service">Turn on the Mersal service first</string>
+
+    <string name="footer">Do not touch the screen while sending, and use it only with chats that agree to it.</string>
+</resources>

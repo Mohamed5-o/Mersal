@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mersal</string>
+    <string name="tagline">أرسل. كرّر. وارتاح.</string>
+    <string name="lang_toggle">English</string>
+    <string name="service_desc">يضغط زر الإرسال في واتساب نيابةً عنك بالعدد والفاصل اللذين تحددهما فقط. لا يقرأ محادثاتك ولا يرسل أي بيانات.</string>
+
+    <string name="status_on">الخدمة تعمل، جاهز للبدء</string>
+    <string name="status_off">خدمة إمكانية الوصول متوقفة</string>
+    <string name="enable">تفعيل</string>
+    <string name="status_help">افتح إعدادات سهولة الوصول، اختر Mersal وفعّل الخدمة. لو المفتاح رمادي: معلومات التطبيق ثم قائمة النقاط الثلاث ثم السماح بالإعدادات المقيّدة.</string>
+
+    <string name="label_phone">رقم المحادثة</string>
+    <string name="hint_phone">رمز الدولة + الرقم، مثال 201001234567</string>
+    <string name="label_message">الرسالة</string>
+    <string name="hint_message">اكتب النص المراد تكراره</string>
+    <string name="label_count">عدد المرات</string>
+    <string name="label_interval">الفاصل (ثانية)</string>
+    <string name="limits_note">الفاصل 3 ثوانٍ فأكثر  •  حتى 50 رسالة  •  اضغط خفض الصوت للإيقاف</string>
+
+    <string name="start">ابدأ</string>
+    <string name="stop">إيقاف</string>
+
+    <string name="state_idle">جاهز</string>
+    <string name="state_running">جارٍ الإرسال… %1$d / %2$d</string>
+    <string name="state_done">تم. أُرسلت %1$d رسالة</string>
+    <string name="state_stopped">تم الإيقاف عند %1$d / %2$d</string>
+    <string name="state_timeout">لم أجد زر الإرسال. افتح المحادثة الصحيحة وحاول مرة أخرى.</string>
+    <string name="state_no_whatsapp">واتساب غير مثبّت</string>
+
+    <string name="err_phone">اكتب الرقم مع رمز الدولة</string>
+    <string name="err_message">اكتب الرسالة أولًا</string>
+    <string name="err_count">من 1 إلى 50</string>
+    <string name="err_interval">3 ثوانٍ على الأقل</string>
+    <string name="err_service">فعّل خدمة Mersal أولًا</string>
+
+    <string name="footer">لا تلمس الشاشة أثناء الإرسال، واستخدمه فقط مع محادثات توافق على ذلك.</string>
+</resources>
