@@ -38,4 +38,12 @@
     <string name="err_total">Numbers × times can not exceed 100 in total</string>
     <string name="quick">⚡ Quick: first number only, up to 25, no gap</string>
     <string name="err_quick">Quick mode: 1 to 25 messages</string>
+    <string name="btn_pick">Choose from WhatsApp contacts</string>
+    <string name="pick_title">WhatsApp contacts (up to 5)</string>
+    <string name="search">Search name or number</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_contacts">No WhatsApp contacts found</string>
+    <string name="max_numbers">Up to 5 numbers</string>
+    <string name="perm_denied">Contacts permission is needed to list your WhatsApp contacts</string>
 </resources>

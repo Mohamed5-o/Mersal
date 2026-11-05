@@ -38,4 +38,12 @@
     <string name="err_total">عدد الأرقام × عدد المرات لا يتجاوز 100 إجمالًا</string>
     <string name="quick">⚡ نص فوري: أول رقم فقط، حتى 25 رسالة، بدون فاصل</string>
     <string name="err_quick">النص الفوري: من 1 إلى 25 رسالة</string>
+    <string name="btn_pick">اختر من جهات اتصال واتساب</string>
+    <string name="pick_title">جهات اتصال واتساب (حتى 5)</string>
+    <string name="search">ابحث بالاسم أو الرقم</string>
+    <string name="ok">تم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="no_contacts">لا توجد جهات اتصال واتساب</string>
+    <string name="max_numbers">حتى 5 أرقام فقط</string>
+    <string name="perm_denied">نحتاج إذن جهات الاتصال لعرض أرقام واتساب</string>
 </resources>

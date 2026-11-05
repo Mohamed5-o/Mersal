@@ -133,6 +133,31 @@
                 android:minLines="2" />
 
             <TextView
+                android:id="@+id/btnPick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_pill"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/btn_pick"
+                android:textColor="@color/accent2"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPicked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingMultiplier="1.2"
+                android:textColor="@color/text"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
                 style="@style/Mersal.Label"
                 android:text="@string/label_message" />
 
